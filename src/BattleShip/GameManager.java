@@ -52,21 +52,22 @@ public class GameManager
 	boolean waitFor2PlayersToConnect() throws IOException
 	{
 		try {
-			do {
+			listener = new ServerSocket(1234);
+			while (clients.size() < 2) {
 				System.out.println("still here");
-				listener = new ServerSocket(1234);
 				Socket client = listener.accept();
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 				BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-				clients.add(new Client(in, out, this));
+				Client c = new Client(in, out, this);
+				clients.add(c);
+				out.println("Welcome player. Please wait for 2nd player to join.");
+				out.flush();
 //				out.println(clients.get(0).board.draw());
-//				out.flush();
-//				Thread clientThread = new Thread();
-				
-			} while (clients.size() < 2);
+//				ou
+			};
 		} finally {
-			System.out.println("got here");
-			initPlayers();
+			System.out.println("All players online.");
+//			initPlayers();
 		}
 		return true;
 

@@ -112,7 +112,7 @@ public class Client
 	//When a fire command is typed, this method parses the coordinates and launches a missle at the enemy
 	boolean processFireCmd( String [] s )
 	{
-		Ship ship = targets.fireMissle(new Position(Integer.parseInt(s[0]), Integer.parseInt(s[1])));
+		Ship ship = this.man.getOpponent(this).getGameBoard().fireMissle(new Position(Integer.parseInt(s[0]), Integer.parseInt(s[1])));
 		
 		if (ship == null) {
 			out.println("You missed!");
